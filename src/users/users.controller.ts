@@ -4,11 +4,11 @@ import { AuthGuard } from '@nestjs/passport'
 import { CreateUserDTO } from './dto/create-user.dto'
 
 @Controller('users')
+@UseGuards(AuthGuard('jwt'))
 export class UsersController {
   constructor(private UsersServices: UsersService) {}
 
   @Get()
-  @UseGuards(AuthGuard())
   findAll() {
     return this.UsersServices.findAll()
   }
