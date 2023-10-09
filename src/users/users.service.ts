@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { IUSER } from './user.type'
 import { v4 as uuidv4 } from 'uuid'
-import { convertToKeyValue } from 'src/help/convertKeyValue'
 
 @Injectable()
 export class UsersService {
@@ -35,11 +34,7 @@ export class UsersService {
       commentsCount: 0,
     },
   }
-  private usersObject: { [key: number]: IUSER }
-  onApplicationBootstrap() {
-    const myArray = this.usersList
-    this.usersObject = convertToKeyValue(myArray)
-  }
+
 
   findAll() {
     return this.usersList
@@ -55,6 +50,6 @@ export class UsersService {
   }
 
   findById(id) {
-    return this.usersObject[id]
+    return this.usersList[id]
   }
 }
